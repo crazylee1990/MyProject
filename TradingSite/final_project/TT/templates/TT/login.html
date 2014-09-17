@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block slider_content %}
+<div id="ad-slider-frame">	
+	{% if form.non_field_errors %}
+	      {% for error in form.non_field_errors %}
+	      <h4 style="color:red;verticle-align:center">
+	          {{ error }}
+	      </h4>
+	      {% endfor %}
+	    {% endif %}				
+	<div id="ad-slider">
+		<img src="{% static "img/ad-minionssmall.png" %}" alt="Orage rotating chair" />
+			<div class="ad-caption">
+				<img src="{% static "img/ad-minionsale.png" %}" alt="Mega Sale Sign" />
+				<p>Cute minions</p>
+				<a title="Order Now!" class="ad-order-button" href="#">order now</a>
+			</div>							
+	</div>
+	<div id="login">
+
+	    <form class="form-signin" role="form" method="post" action="{% url 'login' %}">
+    
+    		<table class="logintb" align="center">
+
+      			<tr align="middle">
+        			<input type="username" class="form-control" style="width:200px" placeholder="Username" name="username" required autofocus>
+      			</tr>
+
+      			<tr align="middle">
+        			<input type="password" class="form-control" style="width:200px" placeholder="Password" name="password" required>
+     	 		</tr>
+
+		      	<tr align="middle">
+		        	<td><input class="btn btn-lg btn-primary btn-block" style="width:100px" type="submit" value="Login"></td>
+		        	<td><a href="{% url 'register' %}" class="btn btn-lg btn-primary btn-block" style="width:100px">Register</a></td>
+		      	</tr>
+
+      			<input type="hidden" name="next" value="{{ next }}" />
+    		</table>
+  			{% csrf_token %}
+  		</form>
+	</div>
+</div>					
+
+{% endblock %}
+
+
+{% block content_content %}
+{% endblock %}
+
+{% block sidebar_content %}
+{% endblock %}

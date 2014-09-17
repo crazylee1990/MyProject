@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block slider_content %}
+<div id="ad-slider-frame">					
+	<div id="ad-slider">
+		<img src="{% static "img/ad-lego2small.png" %}" alt="Orage rotating chair" />
+		<div class="ad-caption">
+			<img src="{% static "img/ad-legosale.png" %}" alt="Mega Sale Sign" />
+			<p>Love lego</p>
+			<a title="Order Now!" class="ad-order-button" href="#">order now</a>
+		</div>							
+	</div>
+	<div id="contact">
+		{% if errors %}
+			{% for error in errors%}
+			<p style="color:red">
+				{{error}}
+			</p>
+			{%endfor%}
+		{% endif %}
+
+	    <form class="form-signin" role="form" method="post">
+    
+    		A team of three master students formed in 15637 14Spring class try to challenge the traditional shpping website by exchange the buyers and sellers position. 
+    		
+  			{% csrf_token %}
+  		</form>
+	</div>
+</div>					
+
+{% endblock %}
+
+
+{% block content_content %}
+{% endblock %}
+
+{% block sidebar_content %}
+{% endblock %}

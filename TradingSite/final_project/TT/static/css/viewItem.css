@@ -1,0 +1,130 @@
+.viewWishingItem{position: relative; left:250px; top: -250px; padding-bottom: 37px; width: 250px; height: 224px; font-family: Verdana, arial, sans-serif; font-size: 15px; font-weight: bold;}
+.viewWishingItem table.infoTable{position: relative; left:-20px; top: -50px; width: 280;height: 60px; font-family: Arial, helvetica, sans-serif; font-size: 22px;}
+.viewWishingItem .infoTable tr td{position: relative;left:20px; }
+.viewWishingItem .ad-order-button{position: relative;top:-10px;}
+.viewWishingItem table.buttonSet tr td{height:50px;border-spacing: 10px;width:80%;}
+
+.viewSellingItem{position: relative; left:250px; top: -250px; padding-bottom: 37px; width: 250px; height: 224px; font-family: Verdana, arial, sans-serif; font-size: 15px; font-weight: bold;}
+.viewSellingItem table.infoTable{position: relative; left:-20px; top: -30px; width: 280;height: 60px; font-family: Arial, helvetica, sans-serif; font-size: 22px;}
+.viewSellingItem .infoTable tr td{position: relative;left:20px;}
+.viewSellingItem .ad-order-button{position: relative;top:0px;}
+
+.displayWishingItem{position: relative; left:250px; top: -50px; padding-bottom: 37px; width: 250px; height: 224px; font-family: Verdana, arial, sans-serif; font-size: 15px; font-weight: bold;}
+.displayWishingItem table.infoTable{position: relative; left:-20px; top: -250px; width: 280;height: 60px; font-family: Arial, helvetica, sans-serif; font-size: 22px;}
+.displayWishingItem tr td{position: relative;left:40px;}
+.displayWishingItem table.infoTable tr td.returnButton{position: relative; left:110;}
+.displayWishingItem table.buttonSet{position: relative; top:-200px;}
+.displayWishingItem table.buttonSet tr td{height:50px;border-spacing: 5px;width:80%;}
+
+
+.displaySellingItem{position: relative; left:250px; top: -30px; padding-bottom: 37px; width: 250px; height: 224px; font-family: Verdana, arial, sans-serif; font-size: 15px; font-weight: bold;}
+.displaySellingItem table.infoTable{position: relative; left:-20px; top: -250px; width: 280;height: 60px; font-family: Arial, helvetica, sans-serif; font-size: 22px;}
+.displaySellingItem tr td{position: relative;left:40px;}
+.displaySellingItem table.infoTable tr td.returnButton{position: relative; left:105;}
+.displaySellingItem table.buttonSet{position: relative; top:-200px;}
+.displaySellingItem table.buttonSet tr td{height:50px;border-spacing: 5px;width:80%;}
+
+.rowrow{margin-left: 8px; /*height: 398px; */width:668px;}
+.rowrow .description{width:610px; position: relative; left:10px; top: -20px; right: 250px;font-family: Arial, helvetica, sans-serif; font-size: 15px;}
+.rowrow .viewTags{ position:relative; /*margin:0 auto; */overflow:hidden; padding:5px; height:50px; width:640px;}
+
+
+.rowdown {padding-top: 50px; padding-left: 5px;}
+.rowdown .description{width:610px; position: relative; left:10px; top: -20px; right: 250px;font-family: Arial, helvetica, sans-serif; font-size: 15px;}
+.rowdown .viewTags{ position:relative; /*margin:0 auto; */ overflow:hidden; padding:5px; height:50px; width:640px;}
+
+.displayOrder {position: relative; left:250px; top: -30px; padding-bottom: 37px; width: 250px; height: 224px; font-family: Verdana, arial, sans-serif; font-size: 15px; font-weight: bold;}
+.displayOrder table.infoTable{position: relative; left:-20px; top: -270px; width: 280;height: 60px; font-family: Arial, helvetica, sans-serif; font-size: 15px;}
+.displasyOrder tr td{position: relative;left:40px;}
+
+.createOrder {position: relative; left:250px; top: -105px; padding-bottom: 37px; width: 250px; height: 224px; font-family: Verdana, arial, sans-serif; font-size: 15px; font-weight: bold;}
+.createOrder table.infoTable{position: relative; left:-20px; top: -270px; width: 280;height: 60px; font-family: Arial, helvetica, sans-serif; font-size: 15px;}
+.createOrder tr td{position: relative;left:40px;}
+
+.viewOrder {position: relative; left:250px; top: -20px; padding-bottom: 37px; width: 250px; height: 224px; font-family: Verdana, arial, sans-serif; font-size: 15px; font-weight: bold;}
+.viewOrder table.infoTable{position: relative; left:-20px; top: -270px; width: 280;height: 60px; font-family: Arial, helvetica, sans-serif; font-size: 15px;}
+.viewOrder tr td{position: relative;left:40px;}
+
+.product-display{border:2px solid;border-top-left-radius:10px;border-top-right-radius:10px;}
+.itembytag{width:100px;height:100px;border:1px solid;border-radius:5px;}
+
+
+/*Below is the style for need-confirmation page and confirmation page;*/
+#main .confirmationTitle{
+	background: url(/static/img/registerBackground.jpg) no-repeat 0 0;
+	background-image: url(/static/img/registerBackground.jpg);
+	background-position-x: 0px;
+	background-position-y: 0px;
+	background-size: initial;
+	background-attachment: initial;
+	background-origin: initial;
+	background-clip: initial;background-color: initial;
+	width: 920px;
+	height: 400px;
+	position: relative;
+	left: 30px;
+}
+#main .confirmationTitle h2{
+	position: relative;
+	top: 40px;
+	left: 30px ;
+	font-family: Arial, helvetica, sans-serif; 
+	font-size: 25px;
+	color: #fff;
+	text-shadow: 0 -1px #966734;
+}
+
+#main .confirmationTitle h3{
+	position: relative;
+	top: 70px;
+	left: 50px ;
+	font-family: Arial, helvetica, sans-serif; 
+	font-size: 20px;
+	text-shadow: 0 -1px #966734;
+	color: #fff;
+	word-spacing: 1px;
+	line-height: 1.5;
+}
+
+#main .confirmationTitle h3 a{
+	color:#F5EB0B;
+}
+
+
+/*Below is the style for error page */
+#main .errorPage{
+	background: url(/static/img/registerBackground.jpg) no-repeat 0 0;
+	background-image: url(/static/img/registerBackground.jpg);
+	background-position-x: 0px;
+	background-position-y: 0px;
+	background-size: initial;
+	background-attachment: initial;
+	background-origin: initial;
+	background-clip: initial;background-color: initial;
+	width: 920px;
+	height: 400px;
+	position: relative;
+	left: 30px;
+}
+
+#main .errorPage h2{
+	position: relative;
+	top: 40px;
+	left: 30px ;
+	font-family: Arial, helvetica, sans-serif; 
+	font-size: 30px;
+	color: #ff6600;
+	text-shadow: 0 -1px #966734;
+}
+
+#main .errorPage h3{
+	position: relative;
+	top: 70px;
+	left: 50px ;
+	font-family: Arial, helvetica, sans-serif; 
+	font-size: 25px;
+	text-shadow: 0 -1px #966734;
+	color: #ff6600;
+	word-spacing: 1px;
+	line-height: 1.5;
+}

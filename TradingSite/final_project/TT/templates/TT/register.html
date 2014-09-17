@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block slider_content %}
+<div id="ad-slider-frame">					
+	<div id="ad-slider">
+		<img src="{% static "img/ad-lego2small.png" %}" alt="Orage rotating chair" />
+		<div class="ad-caption">
+			<img src="{% static "img/ad-legosale.png" %}" alt="Mega Sale Sign" />
+			<p>Love lego</p>
+			<a title="Order Now!" class="ad-order-button" href="#">order now</a>
+		</div>						
+	</div>
+	<div id="register">
+		{% if errors %}
+			{% for error in errors%}
+			<p style="color:red">
+				{{error}}
+			</p>
+			{% endfor %}
+		{% endif %}
+
+		<form action="{% url 'register' %}" method="post">
+
+			<table>
+				{% for field in form %}
+				{{field}} {{field.errors}}
+				{% endfor%}
+			</table>
+			<input class="btn btn-lg btn-primary" style="width:250px;height: 35px;margin-top:0px;" type="submit" value="Register" />
+
+		    {% csrf_token %}
+	    </form>
+	</div>
+</div>					
+
+{% endblock %}
+
+
+{% block content_content %}
+
+{% endblock %}
+
+{% block sidebar_content %}
+{% endblock %}

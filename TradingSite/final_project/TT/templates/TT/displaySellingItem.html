@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block slider_content %}
+{% endblock %}
+
+<!-- Content -->
+{% block content_content %}
+<div id="content">
+	
+
+	<!-- Products -->
+	<div class="products">
+		<div class="title">
+			<h2>Item Information</h2>
+			<img class="bullet" src="{% static "img/bullet.png" %}" alt="small grey bullet" />
+		</div>
+		<div class="row">
+			<div id="ad-slider">
+				<object data="{% url 'sellPhoto' sellingItem.id %}" alt="{{sellingItem.name}}" type="image/png" width="200"  height="300" >
+					<img src="{% static "img/default.jpg" %}" type="image/png" width="200" height="300" />
+				</object>
+			</div>
+			<div class = "viewWishingItem infoTable">
+				<table class = "table table-striped table-bordered table-condensed">
+					<tr class="odd">
+						<td class="tableTitle">Name</td>
+						<td class="tableContent">{{sellingItem.name}}</td>
+					</tr>
+					<tr class="even">
+						<td class="tableTitle">Price</td>
+						<td class="tableContent">${{sellingItem.price}}</td>
+					</tr>
+					<tr >
+						<td class="tableTitle">Seller:</td>
+						<td class="tableContent">{{sellingItem.user.username}}</td>
+					</tr>
+					<tr>
+						<td>
+							<a title="Delete" href="{% url 'deleteSellingItem' sellingItem.id %}">Delete</a>
+						</td>
+						<td>
+							<a title="Edit Item" href="{% url 'editSellingItem' sellingItem.id %}">Edit Item</a>
+						</td>
+					</tr>
+					<tr>
+						<td class="returnButton" colspan="2" >
+							<a title="Return" href="{% url 'manage' %}">Return</a>
+						</td>
+					</tr>
+				</table>
+			</div>		
+		</div>
+		<br>
+		<div class="rowrow">
+			<div class="viewTags">
+			    <ul class="nav nav-tabs list" id="myTab">
+			      	<li class="active"><a href="#AAA" data-toggle="tab">Description</a></li>
+	            	<li><a href="#BBB" data-toggle="tab">Seller Document</a></li>
+			  	</ul>
+			</div>
+			<div class="tab-content">
+	            <div class="tab-pane active" id="AAA">
+	            	<p>{{sellingItem.description}}</p>
+	            </div>
+	            <div class="tab-pane" id="BBB">
+	            	<div id="content">
+						<div class="row">
+							<div id="ad-slider">
+								<img src="{% static "img/credit.png" %}" width="200"  width="200"  height="300"/>
+							</div>
+							<div class = "viewWishingItem infoTable">
+								<table class = "table table-striped table-bordered table-condensed">
+									<tr >
+										<td class="tableTitle">Name of Seller:</td>
+										<td>{{doc.user.username}}</td>
+									</tr>
+		            				<tr >
+										<td class="tableTitle">Number of Sale:</td>
+										<td>{{doc.timessell}}</td>
+									</tr>
+									<tr >
+										<td class="tableTitle">Total :</td>
+										<td>{{doc.pricesell}}</td>
+									</tr>
+		            				<tr >
+		            					<td class="tableTitle">Latest Completed Order:</td>
+										<td>{{doc.editTime}}</td>
+									</tr>
+								</table>
+							</div>		
+						</div>
+					</div>
+	            </div>
+	      	</div>
+		</div>
+	</div>	
+	<!-- END wishing item -->
+</div>
+{% endblock %}
+
+

@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block slider_content %}
+{% endblock %}
+
+<!-- Content -->
+{% block content_content %}
+<div id="content">
+	<div class="products">
+		<div class="title">
+			<h2>My Wallet</h2>
+			<img class="bullet" src="{% static "img/bullet.png" %}" alt="small grey bullet" />
+		</div>
+
+		<div class="row">
+			<div id="ad-slider">
+				<img src="{% static "img/wallet.png" %}" width="200" height="300"  alt="" />
+			</div>
+			<div class = "viewWishingItem infoTable">
+				<table class = "table table-striped table-bordered table-condensed">
+					<tr >
+						<td class="tableTitle">Balance:</td>
+						<td>{{wallet.balance}}</td>
+					</tr>
+					<tr >
+						<td class="tableTitle">Pending:</td>
+						<td>{{wallet.pending}}</td>
+					</tr>
+					<tr >
+						<td class="tableTitle">Available:</td>
+						<td>{{wallet.availabe}}</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>	
+</div>
+{% endblock %}
+
+{% block sidebar_content %}
+	<div id="sidebar">
+		<div class="box">
+			<div class="title">
+				<h2>Operation</h2>
+				<img class="bullet" src="{% static "img/bullet.png" %}" alt="small grey bullet" />
+			</div>
+			<ul>
+				<li><a class="link-link" href="{% url 'postWishingItem' %}">Post New Wishing Item</a></li>
+				<li><a class="link-link" href="{% url 'postSellingItem' %}">Post New Selling Item</a></li>	
+				<li><a class="link-link" href="{% url 'wallet' %}">Manage My Wallet</a></li>					
+			</ul>
+		</div>
+		<div class="box">
+			<div class="title">
+				<h2>Partners</h2>
+				<img class="bullet" src="{% static "img/bullet.png" %}" alt="small grey bullet" />
+			</div>
+			<ul>
+				<li><a title="CMU BOOK STORE" href="http://bookstore.web.cmu.edu/home.aspx">CMU BOOK STORE</a></li>
+				<li><a title="IKEA" href="http://www.ikea.com/">IKEA</a></li>
+				<li><a title="Apple" href="http://www.apple.com/">Apple</a></li>
+				<li><a title="Macy's" href="http://www.macys.com/">Macy's</a></li>
+				<li><a title="LEGO" href="http://www.lego.com/en-us/">LEGO</a></li>							
+			</ul>
+		</div>
+	</div>
+{% endblock %}
+

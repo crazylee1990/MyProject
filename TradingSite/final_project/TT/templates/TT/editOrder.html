@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block slider_content %}
+{% endblock %}
+
+<!-- Content -->
+{% block content_content %}
+<div id="content">
+	<div class="products">
+		<div class="title">
+			<h2>Edit your Wishing Item</h2>
+			<img class="bullet" src="{% static "img/bullet.png" %}" alt="small grey bullet" />
+		</div>
+
+		<div class="wishingItem">
+			<form enctype="multipart/form-data" action="{% url 'editWishingItem' id %}" method="post" accept-charset="UTF-8" id="wishingItemForm">
+				{{form.errors}}
+
+				<label class="label">Name:</label> 
+				<label>{{form.name}}</label> 
+				<a>{{form.name.errors}}</a>
+				<p></p>
+
+				<label class="label">Tag:</label> 
+				<label>
+				    <select name="tag" form="wishingItemForm">
+				      <option value=" " selected="selected"> Select a tag first </option> 
+				      <option value="Books">Books</option> 
+				      <option value="Clothing">Clothing</option>
+				      <option value="Electronics">Electronics</option> 
+				      <option value="Food">Food</option>
+				      <option value="Toy">Toys</option> 
+				    </select><br>&nbsp;<br> 
+				</label>
+				<p></p>
+
+				<label class="label">Min Price:</label> 
+				<label>{{form.downPrice}}</label> 
+				<a>{{form.downPrice.errors}}</a>
+				<p></p>
+
+				<label class="label">Max Price:</label> 
+				<label>{{form.upPrice}}</label> 
+				<a>{{form.upPrice.errors}}</a>
+				<p></p>
+
+				<label class="label">Existing Pic:</label> 
+				<img src="{% url 'wishPhoto' id %}" width="300"  alt="{{wishingItem.name}}" />
+				<p></p>
+
+				<label class="label">New Picture:</label> 
+				<label>{{form.pic}}</label> 
+				<a>{{form.pic.errors}}</a>
+				<p></p>
+
+				<label class="label">Description:</label> 
+				<label>{{form.description}}</label> 
+				<a>{{form.description.errors}}</a>
+				<p></p>
+
+				<a class="input"><button class="btn btn-info" type="submit">Done Edit Item</button></a>
+				{% csrf_token %}
+			</form>
+		</div>
+	</div>	
+</div>
+{% endblock %}

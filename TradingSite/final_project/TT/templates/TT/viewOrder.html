@@ -1,0 +1,237 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block slider_content %}
+{% endblock %}
+
+<!-- Content -->
+{% block content_content %}
+<div id="content">
+	<div class="products">
+		<div class="title">
+			<h2>Order Information</h2>
+			<img class="bullet" src="{% static "img/bullet.png" %}" alt="small grey bullet" />
+		</div>
+		<div class="row">
+			<div id="ad-slider">
+				<object data="{% url 'sellPhoto' order.item.id %}" alt="{{order.item.name}}" type="image/png" width="200"  height="300" >
+					<img src="{% static "img/default.jpg" %}" type="image/png" width="200" height="300" />
+				</object>
+			</div>
+			<div class = "viewWishingItem infoTable">
+				<table class = "table table-striped table-bordered table-condensed">
+					<tr >
+						<td class="tableTitle">OrderID:</td>
+						<td >{{order.id}}</td>
+					</tr>
+					<tr >
+						<td class="tableTitle">Order Status:</td>
+						<td>{{order.getStatus}}</td>
+					</tr>
+					<tr >
+						<td class="tableTitle">Number:</td>
+						<td>{{order.totalNum}}</td>
+					</tr>
+					<tr >
+						<td class="tableTitle">Total Price:</td>
+						<td>${{order.totalPrice}}</td>
+					</tr>
+					<tr >
+						<td class="tableTitle">Expires:</td>
+						<td>{{order.getExpireDate}}</td>
+					</tr>
+					<tr>
+						<td>
+							<a title="Return" href="{% url 'manage' %}">Return</a>
+						</td>	
+						{% if type == "buyer" %}
+							{% if orderStatus == "normal" %}
+							<td>
+							<a title="Refuse Order" href="{% url 'refuseOrder' order.id %}">Refuse order</a>
+							</td>
+							{% elif orderStatus == "accepted" %}
+							<td>
+								<a title="Complete Order" href="{% url 'completeOrder' order.id %}">Complete order</a>
+							</td>
+							{% elif orderStatus == "refused" %}
+
+							{% endif %}
+						{% else %} 
+						
+						{% endif %}
+					</tr>
+				</table>
+				{% if orderStatus == "normal" %}
+					<a title="Accept Now" class="ad-accept-button" href="{% url 'acceptOrder' order.id %}">Accept Now</a>
+				{% endif %}
+			</div>		
+		</div>
+		
+		<div class="rowdown">
+			<div class="tabbable">
+	          	<ul class="nav nav-tabs">
+		            <li class="active"><a href="#AAA" data-toggle="tab">Description</a></li>
+		            {% if type == "seller" %}
+		            	<li><a href="#BBB" data-toggle="tab">Buyer Document</a></li>
+		            {% else %}
+		            	<li><a href="#BBB" data-toggle="tab">Seller Document</a></li>
+		            {% endif %}
+		            <li><a href="#CCC" data-toggle="tab">Wishing Item Info</a></li>
+		            <li><a href="#DDD" data-toggle="tab">Selling Item Info</a></li>
+		            <li><a href="#EEE" data-toggle="tab">Recipient</a></li>
+	          	</ul>
+	          	<div class="tab-content">
+		            <div class="tab-pane active" id="AAA">
+		            	<p>{{order.item.description}}</p>
+		            </div>
+		            <div class="tab-pane" id="BBB">
+		            	<div id="content">
+							<div class="row">
+								<div id="ad-slider">
+									<img src="{% static "img/credit.png" %}" width="200"  width="200"  height="300"/>
+								</div>
+								<div class = "viewWishingItem infoTable">
+										<table class = "table table-striped table-bordered table-condensed">
+										{% if type == "seller" %}
+										<tr >
+											<td class="tableTitle">Number of Purchases:</td>
+											<td>{{doc.timesbuy}}</td>
+										</tr>
+										<tr >
+											<td class="tableTitle">Total Value:</td>
+											<td>${{doc.pricebuy}}</td>
+										</tr>
+										{% else %}
+			            				<tr >
+											<td class="tableTitle">Number of Sale:</td>
+											<td>{{doc.timessell}}</td>
+										</tr>
+										<tr >
+											<td class="tableTitle">Total :</td>
+											<td>{{doc.pricesell}}</td>
+										</tr>
+			            				{% endif %}
+			            				<tr >
+			            					<td class="tableTitle">Latest Completed Order:</td>
+											<td>{{doc.editTime}}</td>
+										</tr>
+									</table>
+								</div>		
+							</div>
+						</div>
+		            </div>
+		            <div class="tab-pane" id="CCC">
+		            	<div id="content">
+							<div class="row">
+								<div id="ad-slider">
+									<img src="{% url 'wishPhoto' order.wishingItem.id %}" width="200"  width="200"  height="300"  alt="{{order.wishingItem.name}}" />
+								</div>
+								<div class = "viewWishingItem infoTable">
+										<table class = "table table-striped table-bordered table-condensed">
+										<tr >
+											<td class="tableTitle">Name:</td>
+											<td>{{order.wishingItem.name}}</td>
+										</tr>
+										<tr >
+											<td class="tableTitle">Price:</td>
+											<td>${{order.wishingItem.downPrice}}-{{order.wishingItem.upPrice}}</td>
+										</tr>
+										<tr >
+											<td class="tableTitle">Number:</td>
+											<td>{{order.wishingItem.num}}</td>
+										</tr>
+										<tr >
+											<td class="tableTitle">Buyer:</td>
+											<td>{{order.wishingItem.user.username}}</td>
+										</tr>
+									</table>
+								</div>		
+							</div>
+						</div>		
+	            	</div>
+		            <div class="tab-pane" id="DDD">
+		            	<div id="content">
+							<div class="products">
+								<div class="row">
+									<div id="ad-slider">
+										<img src="{% url 'sellPhoto' order.item.id %}" width="200"  height="300" alt="{{order.item.name}}" />
+									</div>
+								
+									<div class = "viewWishingItem infoTable">
+										<table class = "table table-striped table-bordered table-condensed">
+											<tr>
+												<td class="tableTitle">Name:</td>
+												<td>{{order.item.name}}</td>
+											</tr>
+											<tr>
+												<td class="tableTitle">Price:</td>
+												<td>${{order.item.price}}</td>
+											</tr>
+											<tr>
+												<td class="tableTitle">Seller:</td>
+												<td>{{order.item.user.username}}</td>
+											</tr>
+										</table>
+									</div>		
+								</div>
+							</div>
+						</div>		
+		            </div>
+		            <div class="tab-pane" id="EEE">
+		            	<div id="content">
+							<div class="products">
+								<div class="row">
+									<div id="ad-slider">
+										<img src="{% static "img/fedex.png" %}" width="200"  height="300" alt="{{order.item.name}}" />
+										<div class="ad-caption"></div>
+									</div>
+									<div class = "viewWishingItem infoTable">
+										<table class = "table table-striped table-bordered table-condensed">
+										{% if order.getStatus == "accepted" or order.getStatus == "completed"%}
+										<tr >
+											<td class="tableTitle">Reciepient:</td>
+											<td>{{order.reciepient}}</td>
+										</tr>
+										<tr >
+											<td class="tableTitle">Cell Num:</td>
+											<td>{{order.cell}}</td>
+										</tr>
+										<tr >
+											<td class="tableTitle">Address 1:</td>
+											<td>{{order.address1}}</td>
+										</tr>
+										<tr >
+											<td class="tableTitle">Address 2:</td>
+											<td>{{order.address2}}</td>
+										</tr>
+										<tr >
+											<td class="tableTitle">City:</td>
+											<td>{{order.city}}</td>
+										</tr>
+										<tr >
+											<td class="tableTitle">State:</td>
+											<td>{{order.state}}</td>
+										</tr>
+										<tr >
+											<td class="tableTitle">Zipcode:</td>
+											<td>{{order.zipcode}}</td>
+										</tr>
+										<tr >
+											<td class="tableTitle">Country:</td>
+											<td>{{order.country}}</td>
+										</tr>
+										{% endif %}	
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>		
+		            </div>
+	          	</div>
+	        </div>
+	    </div>
+	</div>	
+</div>
+{% endblock %}
+
+

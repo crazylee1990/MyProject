@@ -1,0 +1,11 @@
+<items>
+	{% for item in items %}
+		<item>
+			<id>{{item.id}}</id>
+			<name>{{item.name}}</name>
+			<upPrice>{{item.upPrice}}</upPrice>
+			<downPrice>{{item.downPrice}}</downPrice>
+			<time>{{item.time}}</time>
+		</item>
+	{% endfor %}
+</items>

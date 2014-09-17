@@ -1,0 +1,175 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+<!-- Slider -->
+{% block slider_content %}
+<div id="slider-frame">					
+	<div id="slider">
+		<ul>
+			<li>
+				<img src="{% static "img/lego2small.png" %}" alt="Orage rotating chair" />
+				<div class="caption">
+					<img src="{% static "img/legosale.png" %}" alt="Mega Sale Sign" />
+					<p>Love LEGO</p>
+					<a title="Order Now!" class="offer-button" href="#">order now</a>
+				</div>	
+			</li>
+			<li>
+				<img src="{% static "img/minionssmall.png" %}" alt="Orage rotating chair" />
+				<div class="caption">
+					<img src="{% static "img/minionsale.png" %}" alt="Mega Sale Sign" />
+					<p>Cute Minions</p>
+					<a title="Order Now!" class="order-button" href="#">order now</a>
+				</div>
+			</li>
+			<li>
+				<img src="{% static "img/jacketsmall.png" %}" alt="Orage rotating chair" />
+				<div class="caption">
+					<img src="{% static "img/jacketsale.png" %}" alt="Mega Sale Sign" />
+					<p>Prepare for spring</p>
+					<a title="Order Now!" class="order-button" href="#">order now</a>
+				</div>
+			</li>
+			<li>
+				<img src="{% static "img/chair.png" %}" alt="Orage rotating chair" />
+				<div class="caption">
+					<img src="{% static "img/megasale.png" %}" alt="Mega Sale Sign" />
+					<p>Get newly designed furniture</p>
+					<a title="Order Now!" class="order-button" href="#">order now</a>
+				</div>
+			</li>
+		</ul>
+		<div class="jcarousel-control">
+    		<a title="slide 1" href="#">1</a>
+     		<a title="slide 2" href="#">2</a>
+      		<a title="slide 3" href="#">3</a>
+     		<a title="slide 4" href="#">4</a>			     		 
+			</div>
+			<div class="slider-arrows">
+				<a title="Next Slide" id="next" href="#">next</a>
+				<a title="Previous Slide" id="prev" href="#">prev</a>
+			</div>   						
+	</div>
+</div>
+{% endblock %}
+<!-- END Slider -->
+
+{% block search_field %}
+	<div id="search">
+		<!-- <form id="searchForm" action="#" onSubmit="sendSearchSellingItemRequest('sellingItem')"> -->
+			<input type="text" id="searchField" class="field" value="" placeholder="Search entire store here..." onKeydown="Javascript: if (event.keyCode==13) sendSearchItemByName();"/>				
+			<button id="searchButton" class="submit-button" name= "sellingItem" onclick="sendSearchItemByName()"></button>
+		<!-- </form>		 -->
+	</div>
+{% endblock %}
+
+{% block sidebar_content %}
+<div id="sidebar">
+	<div class="box">
+		<div class="title">
+			<h2>Categories</h2>
+			<img class="bullet" src="{% static "img/bullet.png" %}" alt="small grey bullet" />
+		</div>
+		<ul>
+			<li><a title="Books" onClick= "sendSearchItemByTag('Books')">Books</a></li>
+			<li><a title="Clothing" onClick= "sendSearchItemByTag('Clothing')">Clothing</a></li>
+			<li><a title="Electronics" onClick= "sendSearchItemByTag('Electronics')">Electronics</a></li>
+			<li><a title="Food" onClick= "sendSearchItemByTag('Food')">Food</a></li>
+			<li><a title="Toy" onClick= "sendSearchItemByTag('Toy')">Toys</a></li>	
+		</ul>
+	</div>
+	<div class="box">
+		<div class="title">
+			<h2>Partners</h2>
+			<img class="bullet" src="{% static "img/bullet.png" %}" alt="small grey bullet" />
+		</div>
+		<ul>
+			<li><a title="CMU BOOK STORE" href="http://bookstore.web.cmu.edu/home.aspx">CMU BOOK STORE</a></li>
+			<li><a title="IKEA" href="http://www.ikea.com/">IKEA</a></li>
+			<li><a title="Apple" href="http://www.apple.com/">Apple</a></li>
+			<li><a title="Macy's" href="http://www.macys.com/">Macy's</a></li>
+			<li><a title="LEGO" href="http://www.lego.com/en-us/">LEGO</a></li>							
+		</ul>
+	</div>
+</div>
+{% endblock %}
+
+
+{% block content_content %}
+<div class="wrapper">
+	<ul class="nav nav-tabs list" id="myTab">
+		<li class="active"><a href="#AAA" data-toggle="tab" onClick= "changeToBuyer()">For Buyer</a></li>
+		<li><a href="#BBB" data-toggle="tab" onClick= "changeToSeller()">For Seller</a></li>
+	</ul>
+	<div class="tabbable">
+        <div class="tab-content">
+          	<div class="tab-pane active" id="AAA"><!-- Buyer -->
+				<div id="content">
+					<div class="products">
+						<div class="index">
+							<div class="title">
+								<h2>Newest Selling Items</h2>
+								<a class="title-link" title="More Products" href="#">View More</a>
+								<img class="bullet" src="{% static "img/bullet.png" %}" alt="small grey bullet" />
+							</div>
+							<div id= "product-list" class="row">	
+								{% for sellingItem in sellingItems %}
+								<div class="product-holder">	
+									<div class="product">
+										<a title="More Details" href="{% url 'viewSellingItem' sellingItem.id %}">
+											<object class="product-display" data="{% url 'sellPhoto' sellingItem.id %}" alt="{{sellingItem.name}}" type="image/png" >
+    											<img class="product-display" src="{% static "img/default.jpg" %}" type="image/png" />
+											</object>
+										</a>
+										<div class="desc">
+											<p>{{sellingItem.name}}</p>
+											<p class="price"><span class="dollar">$</span>{{sellingItem.price}}</p>
+										</div>
+										<div class="bottom"></div>
+									</div>	
+									<div class="product-bottom"></div>
+								</div>
+								{% endfor %}
+							</div>
+						</div>
+					</div>		
+				</div>			           
+          	</div><!-- END Buyer --> 
+          	<div class="tab-pane" id="BBB"><!-- Seller -->
+				<div id="content">
+					<div class="products">
+						<div class="index">
+							<div class="title">
+								<h2>Newest Wishing Items</h2>
+								<a class="title-link" title="More Products" href="#">View More</a>
+								<img class="bullet" src="{% static "img/bullet.png" %}" alt="small grey bullet" />
+							</div>
+							<div id= "product-list2" class="row">	
+								{% for wishingItem in wishingItems %}
+								<div class="product-holder">	
+									<div class="product">
+										<a title="More Details" href="{% url 'viewWishingItem' wishingItem.id %}">
+											<object class="product-display" data="{% url 'wishPhoto' wishingItem.id %}" alt="{{wishingItem.name}}" type="image/png" >
+    											<img class="product-display" src="{% static "img/default.jpg" %}" type="image/png" />
+											</object>
+										</a>
+										<!-- <img class="top-label" src="{% static "img/top.png" %}" alt="top sign" /> -->
+										<div class="desc">
+											<p>{{wishingItem.name}}</p>
+											<p class="price"><span class="dollar">$</span>{{wishingItem.downPrice}}-{{wishingItem.upPrice}}</p>
+										</div>
+										<div class="bottom"></div>
+									</div>	
+									<div class="product-bottom"></div>
+								</div>
+							{% endfor %}
+							</div>
+						</div>
+					</div>
+				</div>			         
+          	</div><!-- END Seller -->  
+        </div>
+    </div> <!-- /tabbable -->
+</div>
+
+{% endblock %}

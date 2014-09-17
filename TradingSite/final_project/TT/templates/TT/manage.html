@@ -1,0 +1,176 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block slider_content %}
+{% endblock %}
+
+<!-- Content -->
+{% block content_content %}
+<div id="content">
+	<!-- Products -->
+	<div class="products">
+		<div class="title">
+			<h2>Wishing Items</h2>
+			<a class="title-link" title="More Products" href="#">View More</a>
+			<img class="bullet" src="{% static "img/bullet.png" %}" alt="small grey bullet" />
+		</div>
+		<div class="row">
+		{% for wishingItem in wishingItems %}
+			
+			<div class="product-holder">	
+				<div class="product">
+					<a title="More Details" href="{% url 'displayWishingItem' wishingItem.id %}">
+						<object class="product-display" data="{% url 'wishPhoto' wishingItem.id %}" alt="{{wishingItem.name}}" type="image/png" >
+    						<img class="product-display" src="{% static "img/default.jpg" %}" type="image/png" />
+						</object>
+					</a>
+					<div class="desc">
+						<p>{{wishingItem.name}}</p>
+						<p class="price"><span class="dollar">$</span>{{wishingItem.downPrice}}-{{wishingItem.upPrice}}</p>
+					</div>
+					<div class="bottom"></div>
+				</div>	
+				<div class="product-bottom"></div>
+			</div>
+			
+		{% endfor %}
+		</div>
+	</div>	
+	<!-- END wishing item -->
+
+	<!-- start Orders received -->
+	<div class="products best-sellers">
+		<div class="title">
+			<h2>Recent Orders Received</h2>
+			<a class="title-link" title="More Bestsellers" href="#">View More</a>
+			<img class="bullet" src="{% static "img/bullet.png" %}" alt="small grey bullet" />
+		</div>
+		<div class="row">
+		{% for order in wishingOrder %}	
+			<div class="product-holder">	
+				<div class="product">
+					<a title="More Details" href="{% url 'viewOrderAsBuyer' order.id %}">
+						<object class="product-display" data="{% url 'sellPhoto' order.item.id %}" alt="{{order.item.name}}" type="image/png" >
+    						<img class="product-display" src="{% static "img/default.jpg" %}" type="image/png" />
+						</object>
+					</a>
+
+					{% if order.getStatus != "normal" %}
+						{% with "img/order-"|add:order.getStatus|add:".png" as orderStatus %}
+						<img class="top-label" src="{% static orderStatus %}" alt="top sign" />
+						{% endwith %}
+					{% endif %}
+
+					<div class="desc">
+						<p>{{order.seller.first_name}}, {{order.seller.last_name}}</p>
+						<p class="price"><span class="dollar">$</span>{{order.totalPrice}}</p>
+					</div>
+					<div class="bottom"></div>
+				</div>	
+				<div class="product-bottom"></div>
+			</div>
+		{% endfor %}
+		</div>	
+		<div class="cl"></div>
+	</div>		
+	<!-- END Orders -->
+
+	<!-- Start selling items -->
+	<div class="products best-sellers">
+		<div class="title">
+			<h2>Selling Items</h2>
+			<a class="title-link" title="More Bestsellers" href="#">View More</a>
+			<img class="bullet" src="{% static "img/bullet.png" %}" alt="small grey bullet" />
+		</div>
+		<div class="row">
+		{% for sellingItem in sellingItems %}	
+			<div class="product-holder">	
+				<div class="product">
+					<a title="More Details" href="{% url 'displaySellingItem' sellingItem.id %}">
+						<object class="product-display" data="{% url 'sellPhoto' sellingItem.id %}" alt="{{sellingItem.name}}" type="image/png" >
+    						<img class="product-display" src="{% static "img/default.jpg" %}" type="image/png" />
+						</object>
+					</a>
+					
+					<div class="desc">
+						<p>{{sellingItem.name}}</p>
+						<p class="price"><span class="dollar">$</span>{{sellingItem.price}}</p>
+					</div>
+					<div class="bottom"></div>
+				</div>	
+				<div class="product-bottom"></div>
+			</div>
+		{% endfor %}
+		</div>	
+		<div class="cl"></div>
+	</div>	
+	<!-- END Selling Items -->
+
+	<!-- Start Orders the user offered -->
+	<div class="products best-sellers">
+		<div class="title">
+			<h2>Orders I offered</h2>
+			<a class="title-link" title="More Bestsellers" href="#">View More</a>
+			<img class="bullet" src="{% static "img/bullet.png" %}" alt="small grey bullet" />
+		</div>
+		<div class="row">
+		{% for offeringOrder in sellingOrder %}	
+			<div class="product-holder">	
+				<div class="product">
+					<a title="More Details" href="{% url 'viewOrderAsSeller' offeringOrder.id %}">
+						<object class="product-display" data="{% url 'sellPhoto' offeringOrder.item.id %}" alt="{{offeringOrder.item.name}}" type="image/png" >
+    						<img class="product-display" src="{% static "img/default.jpg" %}" type="image/png" />
+						</object>
+					</a>
+
+					{% if offeringOrder.getStatus != "normal" %}	
+						{% with "img/order-"|add:offeringOrder.getStatus|add:".png" as orderStatus %}
+						<img class="top-label" src="{% static orderStatus %}" alt="top sign" />
+						{% endwith %}
+					{% endif %}
+					<div class="desc">
+						<p>{{offeringOrder.buyer.first_name}}, {{offeringOrder.buyer.last_name}}</p>
+						<p class="price"><span class="dollar">$</span>{{offeringOrder.totalPrice}}</p>
+					</div>
+					<div class="bottom"></div>
+				</div>	
+				<div class="product-bottom"></div>
+			</div>
+		{% endfor %}
+		</div>	
+		<div class="cl"></div>
+	</div>	
+	<!-- END Offering Orders-->
+
+</div>
+{% endblock %}
+
+
+{% block sidebar_content %}
+	<div id="sidebar">
+		<div class="box">
+			<div class="title">
+				<h2>Operation</h2>
+				<img class="bullet" src="{% static "img/bullet.png" %}" alt="small grey bullet" />
+			</div>
+			<ul>
+				<li><a class="link-link" href="{% url 'postWishingItem' %}">Post New Wishing Item</a></li>
+				<li><a class="link-link" href="{% url 'postSellingItem' %}">Post New Selling Item</a></li>	
+				<li><a class="link-link" href="{% url 'wallet' %}">Manage My Wallet</a></li>					
+			</ul>
+		</div>
+		<div class="box">
+			<div class="title">
+				<h2>Partners</h2>
+				<img class="bullet" src="{% static "img/bullet.png" %}" alt="small grey bullet" />
+			</div>
+			<ul>
+				<li><a title="CMU BOOK STORE" href="http://bookstore.web.cmu.edu/home.aspx">CMU BOOK STORE</a></li>
+				<li><a title="IKEA" href="http://www.ikea.com/">IKEA</a></li>
+				<li><a title="Apple" href="http://www.apple.com/">Apple</a></li>
+				<li><a title="Macy's" href="http://www.macys.com/">Macy's</a></li>
+				<li><a title="LEGO" href="http://www.lego.com/en-us/">LEGO</a></li>							
+			</ul>
+		</div>
+	</div>
+{% endblock %}

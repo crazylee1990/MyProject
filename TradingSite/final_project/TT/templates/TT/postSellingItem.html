@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block slider_content %}
+{% endblock %}
+
+<!-- Content -->
+{% block content_content %}
+<div id="content">
+	<!-- Products -->
+	<div class="products">
+		<div class="title">
+			<h2>Post your Selling Item</h2>
+			<img class="bullet" src="{% static "img/bullet.png" %}" alt="small grey bullet" />
+		</div>
+		<div class="wishingItem">
+
+			<form enctype="multipart/form-data" action="{% url 'postSellingItem' %}" method="post" accept-charset="UTF-8" id="sellingItemForm">
+				{{form.errors}}
+
+				<label class="label">Name:</label> 
+				<label>{{form.name}}</label> 
+				<a>{{form.name.errors}}</a>
+				<p></p>
+
+				<label class="label">Tag:</label> 
+				<label>
+				    <select name="tag" form="sellingItemForm">
+				      <option value=" " selected="selected"> Select a tag first </option> 
+				      <option value="Books">Books</option> 
+				      <option value="Clothing">Clothing</option>
+				      <option value="Electronics">Electronics</option> 
+				      <option value="Food">Food</option>
+				      <option value="Toy">Toys</option> 
+				    </select><br>&nbsp;<br> 
+				</label>
+				<p></p>
+
+				<label class="label">Price:</label> 
+				<label>{{form.price}}</label> 
+				<a>{{form.price.errors}}</a>
+				<p></p>
+
+				<label class="label">Picture:</label> 
+				<label>{{form.pic}}</label> 
+				<a>{{form.pic.errors}}</a>
+				<p></p>
+
+				<label class="label">Description:</label> 
+				<label>{{form.description}}</label> 
+				<a>{{form.description.errors}}</a>
+				<p></p>
+
+				<a class="input"><button class="btn btn-info" type="submit">Post New Item</button></a>
+				{% csrf_token %}
+
+			</form>
+		</div>
+	</div>	
+
+</div>
+{% endblock %}
+
+{% block sidebar_content %}
+	<div id="sidebar">
+		<div class="box">
+			<div class="title">
+				<h2>Operation</h2>
+				<img class="bullet" src="{% static "img/bullet.png" %}" alt="small grey bullet" />
+			</div>
+			<ul>
+				<li><a class="link-link" href="{% url 'postWishingItem' %}">Post New Wishing Item</a></li>
+				<li><a class="link-link" href="{% url 'postSellingItem' %}">Post New Selling Item</a></li>	
+				<li><a class="link-link" href="{% url 'wallet' %}">Manage My Wallet</a></li>					
+			</ul>
+		</div>
+		<div class="box">
+			<div class="title">
+				<h2>Partners</h2>
+				<img class="bullet" src="{% static "img/bullet.png" %}" alt="small grey bullet" />
+			</div>
+			<ul>
+				<li><a title="CMU BOOK STORE" href="http://bookstore.web.cmu.edu/home.aspx">CMU BOOK STORE</a></li>
+				<li><a title="IKEA" href="http://www.ikea.com/">IKEA</a></li>
+				<li><a title="Apple" href="http://www.apple.com/">Apple</a></li>
+				<li><a title="Macy's" href="http://www.macys.com/">Macy's</a></li>
+				<li><a title="LEGO" href="http://www.lego.com/en-us/">LEGO</a></li>							
+			</ul>
+		</div>
+	</div>
+{% endblock %}

@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block slider_content %}
+{% endblock %}
+
+<!-- Content -->
+{% block content_content %}
+<div id="content">
+	
+
+	<!-- Products -->
+	<div class="products">
+		<div class="title">
+			<h2>Item Information</h2>
+			<img class="bullet" src="{% static "img/bullet.png" %}" alt="small grey bullet" />
+		</div>
+		<div class="row">
+			<div id="ad-slider">
+				<object data="{% url 'wishPhoto' wishingItem.id %}" alt="{{wishingItem.name}}" type="image/png" width="200"  height="300" >
+					<img src="{% static "img/default.jpg" %}" type="image/png" width="200" height="300" />
+				</object>
+			</div>
+			<div class = "viewWishingItem infoTable">
+				<table class = "table table-striped table-bordered table-condensed">
+					<tr >
+						<td class="tableTitle">Name:</td>
+						<td>{{wishingItem.name}}</td>
+					</tr>
+					<tr >
+						<td class="tableTitle">Price:</td>
+						<td>${{wishingItem.downPrice}}-{{wishingItem.upPrice}}</td>
+					</tr>
+					<tr >
+						<td class="tableTitle">Number:</td>
+						<td>{{wishingItem.num}}</td>
+					</tr>
+					<tr >
+						<td class="tableTitle">Buyer:</td>
+						<td>{{wishingItem.user.username}}</td>
+					</tr>
+				</table>
+				<a title="Order Now" class="ad-offer-button" href="{% url 'createOrder' wishingItem.id %}">Order Now</a>
+			</div>		
+		</div>
+		<div class="rowrow">
+			<div class="viewTags">
+			    <ul class="nav nav-tabs list" id="myTab">
+			      	<li class="active"><a href="#AAA" data-toggle="tab">Description</a></li>
+	            	<li><a href="#BBB" data-toggle="tab">Buyer Document</a></li>
+			  	</ul>
+			</div>
+			<div class="tab-content">
+	            <div class="tab-pane active" id="AAA">
+	            	<p>{{wishingItem.description}}</p>
+	            </div>
+	            <div class="tab-pane" id="BBB">
+	            	<div id="content">
+						<div class="row">
+							<div id="ad-slider">
+								<img src="{% static "img/credit.png" %}" width="200"  width="200"  height="300"/>
+							</div>
+							<div class = "viewWishingItem infoTable">
+								<table class = "table table-striped table-bordered table-condensed">
+									<tr >
+										<td class="tableTitle">Name of Buyer:</td>
+										<td>{{doc.user.username}}</td>
+									</tr>
+		            				<tr >
+										<td class="tableTitle">Number of Sale:</td>
+										<td>{{doc.timessell}}</td>
+									</tr>
+									<tr >
+										<td class="tableTitle">Total :</td>
+										<td>{{doc.pricesell}}</td>
+									</tr>
+		            				<tr >
+		            					<td class="tableTitle">Latest Completed Order:</td>
+										<td>{{doc.editTime}}</td>
+									</tr>
+								</table>
+							</div>		
+						</div>
+					</div>
+	            </div>
+	      	</div>
+		</div>
+	</div>	
+	<!-- END wishing item -->
+</div>
+{% endblock %}
+
+

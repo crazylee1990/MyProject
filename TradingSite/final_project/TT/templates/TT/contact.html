@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block slider_content %}
+<div id="ad-slider-frame">					
+	<div id="ad-slider">
+		<img src="{% static "img/ad-minionssmall.png" %}" alt="Orage rotating chair" />
+			<div class="ad-caption">
+				<img src="{% static "img/ad-minionsale.png" %}" alt="Mega Sale Sign" />
+				<p>Cute minions</p>
+				<a title="Order Now!" class="ad-order-button" href="#">order now</a>
+			</div>							
+	</div>
+	<div id="contact">
+		{% if errors %}
+			{% for error in errors%}
+			<p style="color:red">
+				{{error}}
+			</p>
+			{%endfor%}
+		{% endif %}
+
+	    <form class="form-signin" role="form" method="post">
+    
+    		Please email to the following email address if you have any questions:
+
+    		jialiu1@andrew.cmu.edu
+    		lli@andrew.cmu.edu
+    		chaol1@andrew.cmu.edu
+    		
+  			{% csrf_token %}
+  		</form>
+	</div>
+</div>					
+{% endblock %}
+
+
+{% block content_content %}
+{% endblock %}
+
+{% block sidebar_content %}
+{% endblock %}
