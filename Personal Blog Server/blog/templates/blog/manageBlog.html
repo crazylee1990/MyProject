@@ -1,0 +1,100 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+  	<title>A Posting Page</title>
+  	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="blog content" content="Creat a table for the blog web page with Bootstrap">
+	<!-- Bootstrap -->
+	{% load staticfiles %}
+  	<link rel="stylesheet"  type="text/css" href="{% static "blog/bootstrap.min.css"%}">
+  	<link rel="stylesheet" type="text/css" href="{% static "blog/signin.css"%}">
+</head>
+
+<body>
+{% for error in errors %}
+<p style="color:red">
+{{error}}
+</p>
+{% endfor %}
+<div class="container">
+	<h1>Chao Li's Blogging Site</h1>
+
+	<div class="row">
+    	<div class="navbar">
+        	<button data-target=".navbar-responsive-collapse" data-toggle="collapse" class="navbar-toggle" type="button"> <span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+        	<div class="nav-collapse collapse navbar-responsive-collapse">
+            <!-- <div class="container"> -->
+            	<ul class="nav navbar-nav">
+                	<li class="tg-sidebar-left"><a class=""><span class=""><i class="glyphicon glyphicon-align-justify"></i>
+                    </span></a>
+                	</li>
+                	<li class="active"><a href="/blog/add-item" class="">HomePage</a>
+                	</li>
+                	<li><a href="/blog/logout" class="">Logout</a>
+                	</li>
+                </ul>
+            </div>
+		</div>
+	</div>
+
+<div class="row">
+    <!-- SIDEBAR Open -->
+    <div id="sidebar-left" class="col-2 col-lg-2">
+        <ul class="nav nav-tabs nav-stacked sidemenus">
+            <li><a href="/blog/postings/{{user.first_name}}" class="">Return to All-Postings Page</a></li>
+        </ul>
+    </div>
+    <ol>
+	   <table class = "table table-striped">
+		<thead>
+			<tr>
+				<th>Content</th>
+				<th>Picture</th>
+				<th>Published Date</th>
+				<th>Delete</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for item in items %}
+			{% if item.title %}
+			<tr>
+				<td>{{item.title}}</td>
+				{% if item.picture %}
+            		<td><img src="/blog/photo/{{item.id}}" width="200px"></td>
+            	{% else %}
+            		<td></td>	
+        		{% endif %} 
+				<td>{{item.pub_date}}</td>
+				<td><a href="/blog/delete-item/{{item.id}}">X</a></td>
+			</tr>
+			{% endif %}
+			{% endfor %}
+		</tbody>
+	</table>
+	</ol>
+    </div>
+  </div>
+</div>
+    </div>
+        
+    </div>
+</div>
+
+</div>
+</div>
+
+	<div class="container">
+		<form class="form-signin" role="form" action="/blog/add-item"  method="post" enctype="multipart/form-data">
+			<h3 class="form-signin-heading">New Postings</h3>
+			<input type="text" name="item" class="form-control" placeholder="Add new blog" required autofocus>
+			Photo to Include: <input type="file" name = "picture"><br>
+			<input class="btn btn-lg btn-primary btn-block" type="submit" value="Save entry">
+			{% csrf_token %}
+			<!-- <button class="btn btn-lg btn-primary btn-block" type="submit">Add to table</button> -->
+			
+			<p><a href="/blog/logout">Logout</a></p>
+		</form>
+	</div>
+</body>
+</html>

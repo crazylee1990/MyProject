@@ -1,0 +1,92 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+  	<title>A Posting Page</title>
+  	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="blog content" content="Creat a table for the blog web page with Bootstrap">
+	<!-- Bootstrap -->
+	{% load staticfiles %}
+  	<link rel="stylesheet"  type="text/css" href="{% static "blog/bootstrap.min.css"%}">
+  	<link rel="stylesheet" type="text/css" href="{% static "blog/signin.css"%}">
+  </head>
+
+<body>
+{% for error in errors %}
+<p style="color:red">
+{{error}}
+</p>
+{% endfor %}
+<div class="container">
+	<h1>Chao Li's Blogging Site</h1>
+  <h3>Welcom visitor! Please <a href="/blog">Login</a> or <a href="/blog/register">Sign Up</a> to join us</h3>
+
+
+	<div class="row">
+    	<div class="navbar">
+        	<button data-target=".navbar-responsive-collapse" data-toggle="collapse" class="navbar-toggle" type="button"> <span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+        	<div class="nav-collapse collapse navbar-responsive-collapse">
+            <!-- <div class="container"> -->
+            	<ul class="nav navbar-nav">
+                	<li class="tg-sidebar-left"><a class=""><span class=""><i class="glyphicon glyphicon-align-justify"></i>
+                    </span></a>
+                	</li>
+                	<li class="active"><a href="/blog/add-item" class="">HomePage</a>
+                	</li>
+                	<li><a href="/blog/logout" class="">Logout</a>
+                	</li>
+                </ul>
+          </div>
+		  </div>
+
+
+	</div>
+</div>
+
+<div class="row">
+    <!-- SIDEBAR Open -->
+    <div id="sidebar-left" class="col-2 col-lg-2">
+        <ul class="nav nav-tabs nav-stacked sidemenus">
+            {% for user in allUsers %}
+              <li><a href="/blog/visitorPage/{{user.first_name}}" class="">{{user.first_name}}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div id="content-right" class="col-lg-10 container" style="background-color:#fff;">
+      <div class="container">
+        {% if chosen_user == None%}
+          <h2 class="">You can click the user in the left side bar to view their Recent Postings</h2><br>
+        {% else %}
+          <h2>This user's Recent Postings</h3><br>
+          <ol>
+          <table class = "table table-striped">
+            <thead>
+              <tr>
+                <th>Content</th>
+                <th>Picture</th>
+                <th>Published Date</th>
+              </tr>
+            </thead>
+            <tbody id = "myTable">
+              {% for item in items %}
+                {% if item.title %}
+                  <tr>
+                    <td id = "title">{{item.title}}</td>
+                    {% if item.picture %}
+                      <td id="image"><img src="/blog/photo/{{item.id}}" width="200px"></td>
+                    {% else %}
+                      <td></td> 
+                    {% endif %} 
+                    <td>{{item.pub_date}}</td>
+                  </tr>
+                {% endif %}
+              {% endfor %}
+            </tbody>
+          </table>
+          </ol> 
+        {% endif %} 
+    </div>
+  </div>
+</div>
+</body>
+</html>

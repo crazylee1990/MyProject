@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+  		<meta charset="utf-8">
+  		<title>Register A Blog User</title>
+	  	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	  	<!-- Bootstrap -->
+	  	{% load staticfiles %}
+	  	<link rel="stylesheet" href="{% static "blog/bootstrap.min.css"%}">
+	  	<link rel="stylesheet" type="text/css" href="{% static "blog/signin.css"%}">
+	</head>
+
+	<body>
+		{% for error in errors %}
+		<p style="color: red">
+			{{ error }}
+		</p>
+		{% endfor %}
+
+		<form class="form-signin" role="form" action="/blog/register" method="post">
+			<h2>Registration</h2>
+			<input type="text" name="username" value="{{username}}" class="form-control" placeholder="Email Address" required autofocus>
+	        <input type="text" name="firstName" class="form-control" placeholder="First Name" required>
+	        <input type="text" name="lastName" class="form-control" placeholder="Last Name" required>
+			<input type="password" name="password1" class="form-control" name="passwd" placeholder="Password" required>
+			<input type="password" name="password2" class="form-control" name="conpasswd"placeholder="Confirm Password" required>
+			<button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
+			{% csrf_token %}
+		</form>
+	</body>
+</html>
+

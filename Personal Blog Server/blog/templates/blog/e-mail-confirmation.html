@@ -1,0 +1,22 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta charset="utf-8">
+  		<title>Confirmation Page</title>
+  		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="blog content" content="Creat a table for the blog web page with Bootstrap">
+		<!-- Bootstrap -->
+		{% load staticfiles %}
+  		<link rel="stylesheet" href="{% static "blog/bootstrap.min.css"%}">
+  		<link rel="stylesheet" type="text/css" href="{% static "blog/signin.css"%}">
+	</head>
+
+	<body>
+		<h2>Congratulations!</h2>
+		{% if is_confirmed %}
+			<h3>Congratulations! Your account has been sucessfully comfirmed. Please click <a href="/blog/">here</a> to go to your blog page</h3>
+		{% else %}
+			<h3>Your account has not been confirmed. Please click <a href="/blog/">here</a> to go to your blog page</h3>
+		{% endif %}
+	</body>
+</html>

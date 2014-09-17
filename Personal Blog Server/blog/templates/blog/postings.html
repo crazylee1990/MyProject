@@ -1,0 +1,137 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+  	<title>A Posting Page</title>
+  	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="blog content" content="Creat a table for the blog web page with Bootstrap">
+	<!-- Bootstrap -->
+	{% load staticfiles %}
+  	<link rel="stylesheet"  type="text/css" href="{% static "blog/bootstrap.min.css"%}">
+  	<link rel="stylesheet" type="text/css" href="{% static "blog/signin.css"%}">
+    <style type="text/css"> 
+      #index_plist{list-style:none; text-align:center; font-size:12px; background:none; float:left} 
+      #index_plist li{width:90px; height:30px; line-height:30px; float:left; margin:5px; list-style:none;font-size:large;} 
+      #index_plist a{height:100%; display:block; text-decoration:none} 
+      #index_plist .curr{background:#FFD; color:black; background: blue} /* 点击后的样式 */ 
+</style>
+</head>
+
+<body>
+{% for error in errors %}
+<p style="color:red">
+{{error}}
+</p>
+{% endfor %}
+<div class="container">
+	<h1>Chao Li's Blogging Site</h1>
+
+	<div class="row">
+    	<div class="navbar">
+        	<button data-target=".navbar-responsive-collapse" data-toggle="collapse" class="navbar-toggle" type="button"> <span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+        	<div class="nav-collapse collapse navbar-responsive-collapse">
+            <!-- <div class="container"> -->
+            	<ul class="nav navbar-nav">
+                	<li class="tg-sidebar-left"><a class=""><span class=""><i class="glyphicon glyphicon-align-justify"></i>
+                    </span></a>
+                	</li>
+                	<li class="active"><a href="/blog/add-item" class="">HomePage</a>
+                	</li>
+                	<li><a href="/blog/logout" class="">Logout</a>
+                	</li>
+                </ul>
+            </div>
+		</div>
+	</div>
+
+<div class="row">
+    <!-- SIDEBAR Open -->
+    <div id="sidebar-left" class="col-2 col-lg-2">
+        <ul class="nav nav-tabs nav-stacked sidemenus">
+            <li><a href="/blog/manage" class="">Manage My Page</a></li>
+            <li>View other blogs </li>
+            <div id ="index_plist">
+            {% for user in allUsers %}
+              <li><a href="/blog/postings/{{user.first_name}}" class="">{{user.first_name}}</a></li>
+            {% endfor %}
+            </div>
+        </ul>
+    </div>
+    <div id="content-right" class="col-lg-10 container" style="background-color:#fff;">
+    	<div class="container">         
+        <h2 class="">Welcome {{first_name}} {{last_name}} <a href="/blog/logout">Logout</a></h2><br>
+          
+    <div class="accordion" id="accordion2">
+  <div class="accordion-group">
+    <ol>
+  {% if not items %}
+    <h2>Please click the uesr leftside to follow them</h2>
+  {% else %}
+  	<table class = "table table-striped">
+  		<thead>
+  			<tr>
+          <th>Author</th>
+  				<th>Content</th>
+  				<th>Picture</th>
+  				<th>Published Date</th>
+  			</tr>
+  		</thead>
+  		<tbody>
+  			{% for item in items %}
+  			{% if item.title %}
+  			<tr>
+          <td>{{item.user.first_name}}</td>
+  				<td>{{item.title}}</td>
+  				{% if item.picture %}
+              		<td><img src="/blog/photo/{{item.id}}" width="200px"></td>
+              	{% else %}
+              		<td></td>	
+          		{% endif %} 
+  				<td>{{item.pub_date}}</td>
+  			</tr>
+  			{% endif %}
+  			{% endfor %}
+  		</tbody>
+  	</table>
+  	</ol>	
+  {% endif%}
+
+<!--
+		<div class = "item"><a href="/blog/delete-item/{{item.id}}">X</a>{{item.title}}
+			&nbsp&nbsp&nbsp Time Published:&nbsp{{item.pub_date}}</div>
+	<ul>
+		<div class = "time"></div>
+	</ul>
+-->
+
+    </div>
+  </div>
+</div>
+    </div>
+        
+    </div>
+</div>
+
+</div>
+
+</div>
+<script type="text/javascript"> 
+  var index_plist={ 
+    obj : document.getElementById("index_plist").getElementsByTagName("li"), 
+    currObj : null, 
+  init : function(){ 
+      for(i=0;i<index_plist.obj.length;i++){ 
+        eval("index_plist.obj[i].getElementsByTagName('a')[0].onclick=function(){
+          this.className='curr';
+          if(index_plist.currObj){
+            index_plist.currObj.className=''
+          }
+          index_plist.currObj=this}") 
+      } 
+    } 
+  } 
+  index_plist.init() 
+</script>
+{% csrf_token %}
+</body>
+</html>

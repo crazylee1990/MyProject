@@ -1,0 +1,19 @@
+
+
+{% if chosen_user == 'guest'%}
+<item> </item>
+{% else %}
+<items>{% for item in items %}
+  <item>      {% if item.title %}
+                    <title>{{item.title}}</title>
+                    {% if item.picture %}
+                      <img>{{item.id}}</img>
+                    {% else %}
+                      <img> </img> 
+                    {% endif %} 
+                    <pub_date>{{item.pub_date}}</pub_date>
+              {% endif %}
+  </item>
+        {% endfor %}
+</items>
+{% endif %}
